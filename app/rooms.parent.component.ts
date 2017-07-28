@@ -5,7 +5,13 @@ import { HttpClient } from '@angular/common/http';
   selector: 'room-parent',
   template: `
     <p>ROOM.</p>
-    {{results}}
+    {{results | json}}
+    <br/>
+    <ul>
+      <li *ngFor="let model of results">
+        Room Name : {{model.RoomName}}
+      </li>
+    </ul>
     `
 })
 
@@ -17,7 +23,7 @@ export class RoomParentComponent implements OnInit {
  
   ngOnInit(): void {
     // Make the HTTP request:
-    this.http.get('http://joshduxbury.co.uk/projects/mtg/services/rooms.php').subscribe(data => {
+    this.http.get('http://joshduxbury.co.uk/Projects/mtg/services/rooms.php').subscribe(data => {
       // Read the result field from the JSON response.
       this.results = data;
     });
