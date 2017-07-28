@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'room-parent',
   template: `
-    <p>ROOM.</p>
-    {{results | json}}
+    <p>ROOMS.</p>
     <br/>
+    <create-room></create-room>
     <ul>
       <li *ngFor="let model of results">
         Room Name : {{model.RoomName}}
