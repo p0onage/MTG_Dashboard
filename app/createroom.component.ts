@@ -11,7 +11,7 @@ import { Room }    from './Room';
         <div #filter>
         <div class="container">
         <h1>Room Form</h1>
-            <form #createRoomForm="ngForm">
+            <form (ngSubmit)="onSubmit()" #createRoomForm="ngForm">
             <div class="form-group">
                 <label for="RoomName">Room Name</label>
                 <input type="text" class="form-control" id="RoomName" 
@@ -33,12 +33,24 @@ import { Room }    from './Room';
 })
 
 export class CreateRoomComponent{
+  constructor(private http: HttpClient) {}
+
   model = new Room(null,'RoomName');
 
   submitted = false;
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+      const url = "http://joshduxbury.co.uk/Projects/mtg/services/addrooms.php";
+      const body = {roomname: this.model.RoomName};
+      this.http.post(url, body).subscribe(    
+      data => {alert(data)},
+      err => {
+        alert('Something went wrong!');
+      });
+  }
 
   // TODO: Remove this when we're done
   get diagnostic() { return JSON.stringify(this.model); }
 }
+
+
