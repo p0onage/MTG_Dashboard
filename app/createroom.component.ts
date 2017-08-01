@@ -40,8 +40,10 @@ export class CreateRoomComponent{
   submitted = false;
 
   onSubmit() {
-      const url = "http://joshduxbury.co.uk/Projects/mtg/services/addrooms.php";
-      const body = {roomname: this.model.RoomName};
+    const url = "http://joshduxbury.co.uk/Projects/mtg/services/addrooms.php";
+    let urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('roomname', this.model.RoomName);
+    var body = urlSearchParams.toString();
       this.http.post(url, body).subscribe(    
       data => {alert(data)},
       err => {
